@@ -1,81 +1,3 @@
-# Codeigniter co Grocery CRUD
-
-Libs Usadas:
-
-- https://www.grocerycrud.com/
-- https://jeromejaglale.com/doc/php/codeigniter_template
-- https://getbootstrap.com/docs/4.3/getting-started/download/
-
-+ Tradução pt_BR core e no Grocery.
-
-
-## Anotações dos vídeos 
-
-- URL para efetuar requisições
-
-![](readme_img/url_ci.png)
-
-#### controller + view base
-
-- application/views/crud/index.php
-
-```html
-<!doctype html>
-<html lang="pt_BR">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>GROCERY TESTE</title>
-	<?php
-		foreach ($css_files as $css){
-			echo "<link rel='stylesheet' href='$css' />";
-		}
-	?>
-</head>
-<body>
-
-<?php
-	echo $output;
-?>
-
-<?php
-foreach ($js_files as $js){
-	echo "<script src='$js' ></script>";
-}
-?>
-</body>
-</html>
-
-```
-
-- application/controllers/Users.php
-
-```php
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Users extends CI_Controller {
-
-	public function index()
-	{
-		$crud = new Grocery_CRUD();
-		$crud->set_table("usuario");
-
-		$form = $crud->render();
-		$this->load->view("crud/index", $form);
-		//var_dump($form);
-
-		// aula 11
-	}
-}
-
-```
-
-#### exemplos de configurações do form
-
-```php
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -121,6 +43,9 @@ class Users extends CI_Controller {
 		// $crud->unset_delete();
 		// $crud->unset_add();
 
+
+
+
 		// render sempre no final!
 		$form = $crud->render();
 		$this->load->view("crud/index", $form);
@@ -129,5 +54,3 @@ class Users extends CI_Controller {
 		// aula 11
 	}
 }
-
-```
