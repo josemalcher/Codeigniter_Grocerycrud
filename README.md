@@ -121,12 +121,28 @@ class Users extends CI_Controller {
 		// $crud->unset_delete();
 		// $crud->unset_add();
 
+		//VALIDAÇÕES
+		// usa o mesmo do CI
+		$crud->set_rules("nome","Nome","min_length[3]");
+		$crud->set_rules("confirma","Confirma senha","matches[senha]");
+
+		// Salvar dados, retirando o campo "confirma" pois não existe no BD
+		$crud->callback_before_insert(array($this,"remove_confirma"));// chama função antes de inserir algo
+
 		// render sempre no final!
 		$form = $crud->render();
 		$this->load->view("crud/index", $form);
 		//var_dump($form);
 
 		// aula 11
+	}
+
+	public function remove_confirma($post_array){
+		unset($post_array['confirma']);
+
+		$post_array["senha"] = md5($post_array["senha"]); // criptografando senha
+
+		return $post_array;
 	}
 }
 

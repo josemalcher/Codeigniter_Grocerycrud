@@ -51,12 +51,11 @@ class Users extends CI_Controller {
 		// Salvar dados, retirando o campo "confirma" pois não existe no BD
 		$crud->callback_before_insert(array($this,"remove_confirma"));// chama função antes de inserir algo
 
-
-
 		// render sempre no final!
 		$form = $crud->render();
-		$this->load->view("crud/index", $form);
+		//$this->load->view("crud/index", $form);
 		//var_dump($form);
+		$this->template->load("template/template_admin","crud/index", $form);
 
 		// aula 11
 	}
